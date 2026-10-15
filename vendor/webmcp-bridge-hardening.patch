@@ -1,0 +1,99 @@
+diff -ru orig/webmcp-main/packages/bridge/src/mcp-server.ts webmcp-main/packages/bridge/src/mcp-server.ts
+--- orig/webmcp-main/packages/bridge/src/mcp-server.ts	2026-09-08 00:29:09.000000000 +0000
++++ webmcp-main/packages/bridge/src/mcp-server.ts	2026-10-01 09:35:05.217388411 +0000
+@@ -30,11 +30,11 @@
+     ...wsOpts,
+     ...options,
+     onConnection: (ws) => {
+-      session.setSocket(ws);
++      // not promoted to the active session until it authenticates
+       ws.send(JSON.stringify({ type: "auth_required" } satisfies BridgeServerMessage));
+     },
+-    onClose: () => session.clearSocket(),
+-    onMessage: (raw) => session.handleMessage(raw, token),
++    onClose: (ws) => session.clearSocket(ws),
++    onMessage: (raw, ws) => session.handleMessage(raw, token, ws),
+   });
+ 
+   mcp.setRequestHandler(ListToolsRequestSchema, async () => ({
+diff -ru orig/webmcp-main/packages/bridge/src/session.ts webmcp-main/packages/bridge/src/session.ts
+--- orig/webmcp-main/packages/bridge/src/session.ts	2026-09-08 00:29:09.000000000 +0000
++++ webmcp-main/packages/bridge/src/session.ts	2026-10-01 09:35:40.413223152 +0000
+@@ -20,7 +20,8 @@
+     this.#ws = ws;
+   }
+ 
+-  clearSocket() {
++  clearSocket(from?: ServerWebSocket<WsData>) {
++    if (from && from !== this.#ws) return; // a stale or unauthenticated socket closing must not wipe the live session
+     this.#ws = null;
+     this.#setTools([]);
+     for (const [, pending] of this.#pending) {
+@@ -37,11 +38,14 @@
+     return this.#tools;
+   }
+ 
+-  handleMessage(raw: string, token: string): void {
+-    const ws = this.#ws;
++  handleMessage(raw: string, token: string, ws: ServerWebSocket<WsData> | null = this.#ws): void {
+     if (!ws) return;
+-
+-    const msg = JSON.parse(raw) as BridgeClientMessage;
++    let msg: BridgeClientMessage;
++    try {
++      msg = JSON.parse(raw) as BridgeClientMessage;
++    } catch {
++      return; // drop a malformed frame instead of crashing the bridge (or tearing down a live session)
++    }
+ 
+     if (msg.type === "auth") {
+       if (msg.token !== token) {
+@@ -50,6 +54,8 @@
+         return;
+       }
+       ws.data.authenticated = true;
++      if (this.#ws && this.#ws !== ws) this.#ws.close(4000, "Replaced by a newer tab");
++      this.#ws = ws; // newest *authenticated* tab becomes the session
+       ws.send(JSON.stringify({ type: "auth_ok" } satisfies BridgeServerMessage));
+       return;
+     }
+@@ -60,6 +66,8 @@
+       return;
+     }
+ 
++    if (ws !== this.#ws) return; // ignore frames from replaced sockets
++
+     if (msg.type === "sync_tools") {
+       this.#setTools(msg.tools);
+       return;
+diff -ru orig/webmcp-main/packages/bridge/src/websocket-server.ts webmcp-main/packages/bridge/src/websocket-server.ts
+--- orig/webmcp-main/packages/bridge/src/websocket-server.ts	2026-09-08 00:29:09.000000000 +0000
++++ webmcp-main/packages/bridge/src/websocket-server.ts	2026-10-01 09:35:05.217035858 +0000
+@@ -4,8 +4,8 @@
+ 
+ export interface BridgeServerOptions extends BridgeSecurityOptions {
+   onConnection?: (ws: ServerWebSocket<{ authenticated: boolean }>) => void;
+-  onClose?: () => void;
+-  onMessage?: (raw: string) => void;
++  onClose?: (ws: ServerWebSocket<{ authenticated: boolean }>) => void;
++  onMessage?: (raw: string, ws: ServerWebSocket<{ authenticated: boolean }>) => void;
+ }
+ 
+ export async function createBridgeWebSocketServer(options: BridgeServerOptions = {}) {
+@@ -40,12 +40,12 @@
+       open(ws) {
+         options.onConnection?.(ws);
+       },
+-      message(_ws, message) {
++      message(ws, message) {
+         const text = typeof message === "string" ? message : new TextDecoder().decode(message);
+-        options.onMessage?.(text);
++        options.onMessage?.(text, ws);
+       },
+-      close() {
+-        options.onClose?.();
++      close(ws) {
++        options.onClose?.(ws);
+       },
+     },
+   });

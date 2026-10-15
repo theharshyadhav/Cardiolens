@@ -1,0 +1,73 @@
+{
+ "generated": "2026-10-12T09:30:54+00:00",
+ "all_passed": true,
+ "partial_run": false,
+ "total_passed": 462,
+ "total_checks": 462,
+ "suites": [
+  {
+   "suite": "parity",
+   "ok": true,
+   "passed": 60,
+   "total": 60,
+   "seconds": 0.0,
+   "exit_code": 0,
+   "skipped_sections": 0
+  },
+  {
+   "suite": "api",
+   "ok": true,
+   "passed": 18,
+   "total": 18,
+   "seconds": 1.8,
+   "exit_code": 0,
+   "skipped_sections": 0
+  },
+  {
+   "suite": "scan",
+   "ok": true,
+   "passed": 24,
+   "total": 24,
+   "seconds": 1.1,
+   "exit_code": 0,
+   "skipped_sections": 0
+  },
+  {
+   "suite": "room",
+   "ok": true,
+   "passed": 53,
+   "total": 53,
+   "seconds": 13.4,
+   "exit_code": 0,
+   "skipped_sections": 0
+  },
+  {
+   "suite": "dicom",
+   "ok": true,
+   "passed": 72,
+   "total": 72,
+   "seconds": 0.4,
+   "exit_code": 0,
+   "skipped_sections": 0,
+   "real_dicom_files": false
+  },
+  {
+   "suite": "cine",
+   "ok": true,
+   "passed": 55,
+   "total": 55,
+   "seconds": 3.4,
+   "exit_code": 0,
+   "skipped_sections": 0
+  },
+  {
+   "suite": "browser",
+   "ok": true,
+   "passed": 180,
+   "total": 180,
+   "seconds": 125.1,
+   "exit_code": 0,
+   "skipped_sections": 0
+  }
+ ]
+}

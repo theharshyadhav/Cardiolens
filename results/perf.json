@@ -1,0 +1,62 @@
+{
+ "page": "index.html",
+ "runs": [
+  {
+   "viewport": "desktop 1440x900",
+   "ready_s": 0.7,
+   "orbit_renders_per_s": 27.2,
+   "canvas_while_moving": [
+    254,
+    218
+   ],
+   "canvas_at_rest": [
+    847,
+    728
+   ],
+   "quality_while_moving": 0.3,
+   "software_renderer_detected": true,
+   "degraded_mode": true,
+   "idle_renders_in_2s": 0,
+   "triangles": 54487
+  },
+  {
+   "viewport": "tablet 820x1100",
+   "ready_s": 0.4,
+   "orbit_renders_per_s": 42.9,
+   "canvas_while_moving": [
+    235,
+    167
+   ],
+   "canvas_at_rest": [
+    786,
+    558
+   ],
+   "quality_while_moving": 0.3,
+   "software_renderer_detected": true,
+   "degraded_mode": true,
+   "idle_renders_in_2s": 0,
+   "triangles": 54487
+  },
+  {
+   "viewport": "phone 400x800",
+   "ready_s": 0.4,
+   "orbit_renders_per_s": 53.8,
+   "canvas_while_moving": [
+    112,
+    161
+   ],
+   "canvas_at_rest": [
+    366,
+    526
+   ],
+   "quality_while_moving": 0.31,
+   "software_renderer_detected": true,
+   "degraded_mode": true,
+   "idle_renders_in_2s": 0,
+   "triangles": 54487
+  }
+ ],
+ "chromium": "141.0.7390.37",
+ "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+ "cores": 2
+}

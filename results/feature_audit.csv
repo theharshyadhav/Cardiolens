@@ -1,0 +1,60 @@
+source_column,key,group,kept,reason
+Age,age,Demographics,True,kind=num
+Sex,male,Demographics,True,kind=bin
+BMI,bmi,Demographics,True,kind=num
+DM,dm,Risk factors,True,kind=bin
+HTN,htn,Risk factors,True,kind=bin
+Current Smoker,smoker,Risk factors,True,kind=bin
+EX-Smoker,exsmoker,Risk factors,True,kind=bin
+FH,fh,Risk factors,True,kind=bin
+DLP,dlp,Risk factors,True,kind=bin
+Airway disease,airway,Risk factors,True,kind=bin
+BP,sbp,Examination,True,kind=num
+PR,pr,Examination,True,kind=num
+Edema,edema,Examination,True,kind=bin
+Lung rales,rales,Examination,True,kind=bin
+Systolic Murmur,sysmurmur,Examination,True,kind=bin
+Typical Chest Pain,typ_cp,Symptoms,True,kind=bin
+Atypical,atyp_cp,Symptoms,True,kind=bin
+Nonanginal,nonang_cp,Symptoms,True,kind=bin
+Dyspnea,dyspnea,Symptoms,True,kind=bin
+Function Class,fclass,Symptoms,True,kind=ord
+Q Wave,qwave,ECG,True,kind=bin
+St Elevation,stelev,ECG,True,kind=bin
+St Depression,stdep,ECG,True,kind=bin
+Tinversion,tinv,ECG,True,kind=bin
+LVH,lvh,ECG,True,kind=bin
+BBB,bbb,ECG,True,kind=bin
+FBS,fbs,Laboratory,True,"kind=num, log1p"
+CR,cr,Laboratory,True,kind=num
+TG,tg,Laboratory,True,"kind=num, log1p"
+LDL,ldl,Laboratory,True,kind=num
+HDL,hdl,Laboratory,True,kind=num
+BUN,bun,Laboratory,True,"kind=num, log1p"
+ESR,esr,Laboratory,True,"kind=num, log1p"
+HB,hb,Laboratory,True,kind=num
+K,k,Laboratory,True,kind=num
+Na,na,Laboratory,True,kind=num
+WBC,wbc,Laboratory,True,kind=num
+Lymph,lymph,Laboratory,True,kind=num
+Neut,neut,Laboratory,True,kind=num
+PLT,plt,Laboratory,True,"kind=num, log1p"
+EF-TTE,ef,Echo,True,kind=num
+Region RWMA,rwma,Echo,True,kind=ord
+VHD,vhd,Echo,True,kind=ord
+Weight,,,False,redundant: BMI is an exact function of Weight and Length (r = 1.0)
+Length,,,False,redundant: BMI is an exact function of Weight and Length (r = 1.0)
+Obesity,,,False,redundant: equals BMI>25 in 99.7% of rows
+Exertional CP,,,False,constant (all 'N')
+CHF,,,False,1 positive row - cannot be learned
+LowTH Ang,,,False,2 positive rows - cannot be learned
+CVA,,,False,5 positive rows
+Weak Peripheral Pulse,,,False,5 positive rows
+CRF,,,False,6 positive rows
+Thyroid Disease,,,False,7 positive rows
+Diastolic Murmur,,,False,9 positive rows
+Poor R Progression,,,False,9 positive rows
+Cath,,target,False,TARGET / leakage guard (never an input)
+LAD,,target,False,TARGET / leakage guard (never an input)
+LCX,,target,False,TARGET / leakage guard (never an input)
+RCA,,target,False,TARGET / leakage guard (never an input)

@@ -1,0 +1,911 @@
+{
+ "page": "index.html",
+ "checks": 133,
+ "failed": 0,
+ "seconds": 113.1,
+ "numbers": {
+  "measure_seconds_in_chromium_swiftshader": 5.07,
+  "ef_pct": 41.01,
+  "ef_range_pct": [
+   38.39,
+   43.49
+  ],
+  "edv_ml": 122.32,
+  "esv_ml": 72.16,
+  "sv_ml": 50.16,
+  "edv_range_ml": [
+   108.2,
+   122.3
+  ],
+  "esv_range_ml": [
+   62.7,
+   72.3
+  ],
+  "heart_rate_bpm": 58.8,
+  "slices_counted": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "ed_phase": 18,
+  "es_phase": 7,
+  "tiles": [
+   "Ejection fraction: 41% range 38\u201343",
+   "End-diastolic volume: 122 mL range 108\u2013122",
+   "End-systolic volume: 72 mL range 63\u201372",
+   "Stroke volume: 50 mL",
+   "Heart rate during scan: 59 bpm",
+   "Cardiac output (SV \u00d7 HR): 2.9 L/min"
+  ],
+  "slice6_off": {
+   "ef": 40.7,
+   "edv": 102.18,
+   "esv": 60.59,
+   "ef_range": [
+    39.59,
+    44.5
+   ]
+  },
+  "slice2_on": {
+   "ef": 30.81,
+   "edv": 163.79,
+   "esv": 113.33,
+   "ef_range": [
+    27.4,
+    30.81
+   ]
+  },
+  "lv_phase_advance_in_0.45s": 11.84,
+  "measure_lv_structured": {
+   "source": "built-in sample (Sunnybrook Cardiac Data, public domain)",
+   "slices_total": 11,
+   "slices_used": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "slices_switched_by_user": false,
+   "phases": 20,
+   "edv_ml": 122.3,
+   "esv_ml": 72.2,
+   "sv_ml": 50.2,
+   "ef_pct": 41,
+   "ef_range_pct": [
+    38.4,
+    43.5
+   ],
+   "edv_range_ml": [
+    108.2,
+    122.3
+   ],
+   "esv_range_ml": [
+    62.7,
+    72.3
+   ],
+   "ed_phase": 18,
+   "es_phase": 7,
+   "heart_rate_bpm": 58.8,
+   "cardiac_output_l_min": 2.95,
+   "pixel_spacing_mm": 1.367,
+   "slice_spacing_mm": 10,
+   "method": "classical contour tracing (no learned model) + modified Simpson; automatic estimate, not validated; range = sensitivity to 5 segmentation settings, not a confidence interval",
+   "warnings": [],
+   "ef_used_in_risk_model": false,
+   "study_epoch": 1
+  },
+  "tool_result_bytes": {
+   "describe_cine:": 600,
+   "measure_lv:": 998,
+   "show_lv_3d:True": 229,
+   "show_lv_3d:False": 164
+  },
+  "meter_after_cine_tools": {
+   "tool_results": 4,
+   "bytes": 1991,
+   "blocked": 0
+  },
+  "measure_lv_with_centre_seconds": 2.66,
+  "measure_lv_with_centre_ef_pct": 39.9,
+  "after_clicking_the_centre": {
+   "ef": 40.26,
+   "edv": 120.71,
+   "esv": 72.11,
+   "slices": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ]
+  },
+  "glass_lv_pixels_ed_es_beat": {
+   "surface_px_ed": 67088,
+   "surface_px_es": 48076,
+   "ed_vs_es_changed_px": 50562,
+   "view": [
+    849,
+    730
+   ]
+  },
+  "solid_then_show": {
+   "mode_after_show": "glass",
+   "seg": [
+    "solid:false",
+    "glass:true",
+    "ghost:false"
+   ],
+   "changed_px": 144571
+  },
+  "solid_selected_while_lv_shown_changed_px": 1784,
+  "lv_token_dark": "#6baed6",
+  "contrast_dark": {
+   "#cine .tile b color": 14.07,
+   "#cine .tile span color": 5.72,
+   "#cine .tile em color": 14.07,
+   "#cinfo color": 6.2,
+   "#ccl color": 15.25,
+   "#cmsg .mu color": 6.2,
+   "#cres .sm color": 15.25,
+   "#cine .gl2 color": 6.2,
+   "#cvc text.lb fill": 15.25,
+   "#cvc text.ax fill": 6.2,
+   "#cvc text.ms fill": 6.2,
+   "#cine .tbl td color": 15.25,
+   "#cine .tbl th color": 6.2,
+   "#cine .btn.pri color": 8.27,
+   "#cine .cc1 button color": 14.07,
+   "#lvc .nm color": 15.35,
+   "#lvc .ds color": 6.24,
+   "#cvc .ln stroke": 7.46,
+   "#cvc .mk stroke": 15.25,
+   "#cine .gauge i.gr backgroundColor": 6.88,
+   "#cine .cc1.cur button borderTopColor": 7.84
+  },
+  "audit_dark": {
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "issues": [],
+   "chart_font_px": [
+    10,
+    9
+   ]
+  },
+  "lv_token_light": "#2171b5",
+  "contrast_light": {
+   "#cine .tile b color": 16.74,
+   "#cine .tile span color": 5.71,
+   "#cine .tile em color": 16.74,
+   "#cinfo color": 6.19,
+   "#ccl color": 18.14,
+   "#cmsg .mu color": 6.19,
+   "#cres .sm color": 18.14,
+   "#cine .gl2 color": 6.19,
+   "#cvc text.lb fill": 18.14,
+   "#cvc text.ax fill": 6.19,
+   "#cvc text.ms fill": 6.19,
+   "#cine .tbl td color": 18.14,
+   "#cine .tbl th color": 6.19,
+   "#cine .btn.pri color": 5.63,
+   "#cine .cc1 button color": 16.74,
+   "#lvc .nm color": 17.95,
+   "#lvc .ds color": 6.13,
+   "#cvc .ln stroke": 5.13,
+   "#cvc .mk stroke": 18.14,
+   "#cine .gauge i.gr backgroundColor": 4.73,
+   "#cine .cc1.cur button borderTopColor": 5.63
+  },
+  "audit_light": {
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "issues": [],
+   "chart_font_px": [
+    10,
+    9
+   ]
+  },
+  "audit_phone": {
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "issues": [],
+   "chart_font_px": [
+    10,
+    9
+   ]
+  },
+  "phone_lv_card": {
+   "card_h": 73,
+   "view_h": 557,
+   "text": "Your left ventricle (cine MRI)\nED 122 mL \u2192 ES 72 mL, EF 41%, beating at 59 bpm. Not an anatomical registration."
+  },
+  "phone_tooltip_at_right_edge": {
+   "hidden": false,
+   "right": 357.421875,
+   "left": 115,
+   "vw": 390,
+   "sw": 390
+  }
+ },
+ "results": [
+  {
+   "name": "status chip says 13 tools",
+   "ok": true,
+   "detail": "WebMCP \u00b7 13 tools"
+  },
+  {
+   "name": "13 tools discoverable via WebMCP, incl. describe_cine, measure_lv, show_lv_3d",
+   "ok": true,
+   "detail": "['describe_heart_model', 'focus_vessel', 'describe_scan', 'find_calcifications', 'focus_region', 'set_view', 'assign_vessel', 'set_heart_region', 'predict_risk', 'export_findings', 'describe_cine', 'measure_lv', 'show_lv_3d']"
+  },
+  {
+   "name": "registered-tools list shows 13 entries",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Cardiac MRI panel is there; results, My LV button and LV card stay hidden until measured",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "--lv token is defined (sequential blue)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "footer credits Sunnybrook (CC0) + citation and keeps the not-validated / not-a-registration labels",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "clinical disclaimer banner still visible",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "describe_cine without a cine: actionable error",
+   "ok": true,
+   "detail": "No cine MRI is loaded. Ask the user to open a short-axis cine series (DICOM files, a folder or a .zip) or press \u201cLoad sa"
+  },
+  {
+   "name": "show_lv_3d without a cine: actionable error",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "describe_heart_model: patient_lv {loaded:false, shown:false} and still 'not patient-specific'",
+   "ok": true,
+   "detail": "{'loaded': False, 'shown': False}"
+  },
+  {
+   "name": "export without a cine: schema v2, cine_mri is null, nothing resolved before the human decides",
+   "ok": true,
+   "detail": "cardiolens.room.v2"
+  },
+  {
+   "name": "deny returns an error and exports nothing",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "fresh page: zero console errors / page errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "fresh page: zero failed requests, nothing fetched outside the page",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the sample is loaded and measured",
+   "ok": true,
+   "detail": "11"
+  },
+  {
+   "name": "EF is about 41 % (40-42)",
+   "ok": true,
+   "detail": "41.01"
+  },
+  {
+   "name": "EF sensitivity range is about 38-43",
+   "ok": true,
+   "detail": "38.39-43.49"
+  },
+  {
+   "name": "EDV is about 122 mL and ESV about 72 mL",
+   "ok": true,
+   "detail": "122.3 / 72.2"
+  },
+  {
+   "name": "slices 3-11 are counted (9 slices)",
+   "ok": true,
+   "detail": "[3, 4, 5, 6, 7, 8, 9, 10, 11]"
+  },
+  {
+   "name": "browser result equals the Python reference (results/cine_reference.json) to 1e-6",
+   "ok": true,
+   "detail": "122.31647947404981 vs 122.31647947404981"
+  },
+  {
+   "name": "tiles on screen show the same numbers",
+   "ok": true,
+   "detail": "[{'v': '41%', 'l': 'Ejection fraction', 'r': 'range 38\u201343'}, {'v': '122 mL', 'l': 'End-diastolic volume', 'r': 'range 108\u2013122'}, {'v': '72 mL', 'l': 'End-systolic volume', 'r': 'range 63\u201372'}]"
+  },
+  {
+   "name": "honesty labels are on screen (automatic estimate, not validated, range is not a confidence interval)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "20 phases in the volume table, 11 slice chips, 9 ticked",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the first draw happened: caption names slice and phase",
+   "ok": true,
+   "detail": "slice 8/11 \u00b7 phase 18/20 \u00b7 894 ms \u00b7 end-diastole"
+  },
+  {
+   "name": "slice 6 off: volumes change (EDV and ESV drop)",
+   "ok": true,
+   "detail": "122.3->102.2"
+  },
+  {
+   "name": "slice 6 off: no re-tracing (measure never called, same measurement object, volumes recomputed)",
+   "ok": true,
+   "detail": "measure calls 0"
+  },
+  {
+   "name": "slice 6 off: the sensitivity range stays sensible (finite, contains the estimate, EF band < 12 points wide)",
+   "ok": true,
+   "detail": "slice 6 off: EF 40.7 range 39.6-44.5, EDV 102.2 (92.7-102.2), ESV 60.6 (51.4-60.8)"
+  },
+  {
+   "name": "slice 6 off: tiles and chip updated, chip says 'changed by you'",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "measure_lv reports the user's slice edit (slices_switched_by_user, slice 6 not counted)",
+   "ok": true,
+   "detail": "[3, 4, 5, 7, 8, 9, 10, 11]"
+  },
+  {
+   "name": "slice 6 on again: numbers return exactly to the start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "slice 2 on (auto-excluded): volumes change, still no re-tracing, range sensible",
+   "ok": true,
+   "detail": "slice 2 on: EF 30.8 range 27.4-30.8, EDV 163.8 (146.1-172.5), ESV 113.3 (103.5-121.6)"
+  },
+  {
+   "name": "slice 2 off again: back to the start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the last counted slice cannot be switched off (checkbox springs back)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "all nine slices back: numbers equal the start",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "before pressing the button: LV not shown, My LV button visible but unpressed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Show my LV in 3D: LV is loaded and shown (surface vertices exist, long-axis tilt reported)",
+   "ok": true,
+   "detail": "{'loaded': True, 'shown': True, 'phase': 17.06071396777353, 'axis_deg': 18.7, 'atlas_axis': [0.807, -0.586, 0.067], 'vertices': 938}"
+  },
+  {
+   "name": "button, HUD toggle and info card agree",
+   "ok": true,
+   "detail": "Your left ventricle (cine MRI)ED 122 mL \u2192 ES 72 mL, EF 41%, beating at 59 bpm. Cavity surface traced from your images; faint outline = end-diastole. Placed in t"
+  },
+  {
+   "name": "the LV beats in real time (playback runs, 3D phase follows the 2D phase)",
+   "ok": true,
+   "detail": "[17.387785987714754, 17.387785987714754, True] -> [5.548918365530132, 5.548918365530132, True]"
+  },
+  {
+   "name": "My LV (3D HUD) hides it; panel button follows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "shown again via the HUD, hidden again via the panel button; the heart's own beat resumes",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "describe_heart_model: patient_lv has numbers only and the text keeps 'not an anatomical registration'",
+   "ok": true,
+   "detail": "{'loaded': True, 'shown': False, 'edv_ml': 122.3, 'ef_pct': 41}"
+  },
+  {
+   "name": "describe_cine({}): ok, text + small structured numbers",
+   "ok": true,
+   "detail": "\"Sunnybrook sample - short-axis cine, 11 slices x 20 phases\" (public-domain sample): 11 slices \u00d7 20 "
+  },
+  {
+   "name": "describe_cine({}): no pixel / vertex / radius arrays, no matrices, nothing the guard looks for",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "describe_cine({}): privacy meter counts one result, no block",
+   "ok": true,
+   "detail": "{'n': 2, 'b': 2020, 'k': 0, 't': ['2', '2.0 KB', '0']} -> {'n': 3, 'b': 2620, 'k': 0, 't': ['3', '2.6 KB', '0']}"
+  },
+  {
+   "name": "describe_cine reports dimensions and heart rate as numbers",
+   "ok": true,
+   "detail": "{'name': 'Sunnybrook sample - short-axis cine, 11 slices x 20 phases', 'sample': True, 'slices': 11, 'phases': 20, 'pixels': [112, 112], 'pixel_spacing_mm': 1.367, 'slice_spacing_mm': 10, 'heart_rate_"
+  },
+  {
+   "name": "measure_lv({}): ok, text + small structured numbers",
+   "ok": true,
+   "detail": "Left ventricle (cine MRI, automatic estimate): EDV 122.3 mL, ESV 72.2 mL, SV 50.2 mL, EF 41% (range "
+  },
+  {
+   "name": "measure_lv({}): no pixel / vertex / radius arrays, no matrices, nothing the guard looks for",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "measure_lv({}): privacy meter counts one result, no block",
+   "ok": true,
+   "detail": "{'n': 3, 'b': 2620, 'k': 0, 't': ['3', '2.6 KB', '0']} -> {'n': 4, 'b': 3618, 'k': 0, 't': ['4', '3.5 KB', '0']}"
+  },
+  {
+   "name": "measure_lv returns the same numbers as the panel (EDV, ESV, EF, ranges, slices)",
+   "ok": true,
+   "detail": "{'source': 'built-in sample (Sunnybrook Cardiac Data, public domain)', 'slices_total': 11, 'slices_used': [3, 4, 5, 6, 7, 8, 9, 10, 11], 'slices_switched_by_user': False, 'phases': 20, 'edv_ml': 122.3, 'esv_ml': 72.2, 'sv_ml': 50.2, 'ef_pct"
+  },
+  {
+   "name": "show_lv_3d({\"on\": true}): ok, text + small structured numbers",
+   "ok": true,
+   "detail": "Showing the patient's left ventricle beating at 58.8 bpm in the 3D heart (EDV 122.3 mL, EF 41%)."
+  },
+  {
+   "name": "show_lv_3d({\"on\": true}): no pixel / vertex / radius arrays, no matrices, nothing the guard looks for",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "show_lv_3d({\"on\": true}): privacy meter counts one result, no block",
+   "ok": true,
+   "detail": "{'n': 4, 'b': 3618, 'k': 0, 't': ['4', '3.5 KB', '0']} -> {'n': 5, 'b': 3847, 'k': 0, 't': ['5', '3.8 KB', '0']}"
+  },
+  {
+   "name": "show_lv_3d(on) really shows the LV in the 3D scene",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "show_lv_3d({\"on\": false}): ok, text + small structured numbers",
+   "ok": true,
+   "detail": "Patient left ventricle hidden."
+  },
+  {
+   "name": "show_lv_3d({\"on\": false}): no pixel / vertex / radius arrays, no matrices, nothing the guard looks for",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "show_lv_3d({\"on\": false}): privacy meter counts one result, no block",
+   "ok": true,
+   "detail": "{'n': 5, 'b': 3847, 'k': 0, 't': ['5', '3.8 KB', '0']} -> {'n': 6, 'b': 4011, 'k': 0, 't': ['6', '3.9 KB', '0']}"
+  },
+  {
+   "name": "show_lv_3d(off) hides it again",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "guard still blocks 'Float32Array'",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "guard still blocks 'data:image/png'",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "guard still blocks 'ImageData'",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "guard still blocks an oversized payload",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "blocked payloads are counted on the live meter",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "measure_lv with a partial centre is refused with the next step",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "measure_lv with a centre outside the image is refused",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "measure_lv with a centre inside the LV re-traces and returns numbers (EF within 4 points of the automatic one)",
+   "ok": true,
+   "detail": "39.9"
+  },
+  {
+   "name": "loading the sample again re-traces from scratch and gives exactly the first numbers (EDV, ESV, EF)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "export_findings blocks while it waits for the human",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "approval dialog shows schema v2 and the cine_mri block (numbers only)",
+   "ok": true,
+   "detail": "['source', 'slices_total', 'slices_used', 'slices_switched_by_user', 'phases', 'edv_ml']"
+  },
+  {
+   "name": "approval dialog still carries the CT-free fields (scan null, clinical risk, generic heart, disclaimer)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Deny returns an error to the agent and exports nothing",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Approve returns the v2 report with the cine block; text says no pixels or mesh were exported",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Escape counts as Deny",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "changing the cine cancels a pending export and closes the dialog",
+   "ok": true,
+   "detail": "{'content': [{'type': 'text', 'text': 'The cine MRI changed during approval; export cancelled. Re-run measure_lv.'}], 'isError': True}"
+  },
+  {
+   "name": "export_findings fails while a cine is being measured (and says what to do)",
+   "ok": true,
+   "detail": "A cine series is still being measured. Wait a moment, then call describe_cine."
+  },
+  {
+   "name": "after the re-measure the numbers are the same as before",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "demo agent calls describe_cine -> measure_lv -> show_lv_3d before asking to export",
+   "ok": true,
+   "detail": "['describe_heart_model', 'predict_risk', 'focus_vessel', 'describe_cine', 'measure_lv', 'show_lv_3d', 'export_findings']"
+  },
+  {
+   "name": "the demo agent's show_lv_3d actually showed the LV",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "demo agent finishes after the human approves",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Play toggles to Pause and the phase advances",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "speed 2x runs",
+   "ok": true,
+   "detail": "9.650048962876838 -> 1.3972224695091384"
+  },
+  {
+   "name": "Pause stops it",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "slice slider moves the image and the caption",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phase slider moves the image and the caption",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "slice chip selects the slice",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "ED / ES outlines checkbox toggles the overlay state",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "hovering the volume curve shows phase, time, volume and range",
+   "ok": true,
+   "detail": "[False, 'phase 10 \u00b7 485 ms \u00b7 86.0 mL (79\u201386)']"
+  },
+  {
+   "name": "clicking the curve jumps to that phase (and pauses)",
+   "ok": true,
+   "detail": "9"
+  },
+  {
+   "name": "'Use this EF in the risk model' moves only the EF input (50 -> 41) and the risk responds, with an undo",
+   "ok": true,
+   "detail": "S.ef=41"
+  },
+  {
+   "name": "pressing again restores the echo EF input",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Pick the LV centre arms the canvas and shows the hint",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "clicking the LV centre re-measures; EF within 4 points, centre mode switched off again",
+   "ok": true,
+   "detail": "EF 40.3"
+  },
+  {
+   "name": "the cursor is back to normal",
+   "ok": true,
+   "detail": "default"
+  },
+  {
+   "name": "main session: zero console errors / page errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "main session: zero failed requests, nothing fetched outside the page",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "reduced motion: showing the LV does not start playback",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Glass: the LV is visible inside the heart (hundreds of pixels differ from the hidden frame)",
+   "ok": true,
+   "detail": "67088"
+  },
+  {
+   "name": "Glass: the LV beats (ED and ES frames differ, ES surface is smaller than ED)",
+   "ok": true,
+   "detail": "67088 vs 48076"
+  },
+  {
+   "name": "Glass: hiding it restores the heart exactly",
+   "ok": true,
+   "detail": "0"
+  },
+  {
+   "name": "Solid: showing the LV switches the heart to Glass so the LV is visible (segmented control agrees)",
+   "ok": true,
+   "detail": "glass ['solid:false', 'glass:true', 'ghost:false'] 144571"
+  },
+  {
+   "name": "Solid chosen by hand while the LV is shown: the opaque wall hides the LV (by design; only a sliver of the dilated apex pokes out)",
+   "ok": true,
+   "detail": "1784 px vs 67088 in Glass"
+  },
+  {
+   "name": "Vessels-only: the LV is visible there too",
+   "ok": true,
+   "detail": "51249"
+  },
+  {
+   "name": "pixel session: zero console errors / page errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "pixel session: zero failed requests, nothing fetched outside the page",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "dark: the data-theme / colour scheme in force is dark",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "dark: all text in the panel and LV card reaches 4.5:1 contrast",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "dark: chart line, markers, gauge bar and selected chip reach 3:1 against the card",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "dark: no horizontal page scroll and nothing in the panel / 3D view outside the card or clipped",
+   "ok": true,
+   "detail": "{'scrollWidth': 1440, 'clientWidth': 1440, 'issues': [], 'chart_font_px': [10, 9]}"
+  },
+  {
+   "name": "dark session: zero console errors / page errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "dark session: zero failed requests, nothing fetched outside the page",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "light: the data-theme / colour scheme in force is light",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "light: all text in the panel and LV card reaches 4.5:1 contrast",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "light: chart line, markers, gauge bar and selected chip reach 3:1 against the card",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "light: no horizontal page scroll and nothing in the panel / 3D view outside the card or clipped",
+   "ok": true,
+   "detail": "{'scrollWidth': 1440, 'clientWidth': 1440, 'issues': [], 'chart_font_px': [10, 9]}"
+  },
+  {
+   "name": "light session: zero console errors / page errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "light session: zero failed requests, nothing fetched outside the page",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone: no horizontal scroll before loading the sample",
+   "ok": true,
+   "detail": "390"
+  },
+  {
+   "name": "phone: no horizontal scroll with the sample loaded and nothing outside the viewport or clipped",
+   "ok": true,
+   "detail": "{'scrollWidth': 390, 'clientWidth': 390, 'issues': [], 'chart_font_px': [10, 9]}"
+  },
+  {
+   "name": "phone: chart text is readable (smallest rendered font >= 9 px)",
+   "ok": true,
+   "detail": "[10, 9]"
+  },
+  {
+   "name": "phone: the chart is laid out at its real width (viewBox = container width, so text keeps its size)",
+   "ok": true,
+   "detail": "[328, 328, 328]"
+  },
+  {
+   "name": "phone: the LV card is short (under 20 % of the 3D view) and still says 'not an anatomical registration'",
+   "ok": true,
+   "detail": "{'card_h': 73, 'view_h': 557, 'text': 'Your left ventricle (cine MRI)\\nED 122 mL \u2192 ES 72 mL, EF 41%, beating at 59 bpm. Not an anatomical registration.'}"
+  },
+  {
+   "name": "phone: no horizontal scroll with the LV shown",
+   "ok": true,
+   "detail": "390"
+  },
+  {
+   "name": "700 px wide (single column): the chart re-lays itself out when the container grows",
+   "ok": true,
+   "detail": "[328, 328, 328] -> [638, 638]"
+  },
+  {
+   "name": "back to 390 px: the chart shrinks again",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone: the chart tooltip at the right edge stays inside the screen (no horizontal scroll)",
+   "ok": true,
+   "detail": "{'hidden': False, 'right': 357.421875, 'left': 115, 'vw': 390, 'sw': 390}"
+  },
+  {
+   "name": "phone session: zero console errors / page errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "phone session: zero failed requests, nothing fetched outside the page",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "without WebGL the MRI panel still measures (EF 41, EDV 122)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "without WebGL the LV button does nothing harmful (LV not shown, label unchanged)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "without WebGL show_lv_3d says the 3D view is not available",
+   "ok": true,
+   "detail": "The 3D view is not available (WebGL missing or still loading)."
+  },
+  {
+   "name": "without WebGL describe_heart_model still reports the loaded LV (numbers)",
+   "ok": true,
+   "detail": "{'loaded': True, 'shown': False, 'edv_ml': 122.3, 'ef_pct': 41}"
+  },
+  {
+   "name": "status chip says 13 tools without WebGL",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "no-WebGL session: zero console errors / page errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "no-WebGL session: zero failed requests, nothing fetched outside the page",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}

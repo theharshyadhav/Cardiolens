@@ -1,0 +1,13 @@
+{
+  "name": "cardiolens-3d",
+  "private": true,
+  "description": "Dev dependencies for the CardioLens 3D tests (the app itself has no build-time npm dependencies).",
+  "scripts": {
+    "test": "node tests/test_parity.js && node tests/test_scan.js && node tests/test_room.js && node tests/test_dicom.js && node tests/test_cine.js",
+    "test:all": "python3 tests/run_all.py"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.1",
+    "three": "0.128.0"
+  }
+}

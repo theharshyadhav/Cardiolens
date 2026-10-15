@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CardioLens 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: sticky 3D stage on the left, scrolling clinical workspace on the right, reading room + agent below.
+   Palette: neutral blue-grey instrument chrome; ONE accent (selection/focus); risk ramp teal -> amber -> red is reserved for
+   predicted probability; SHAP uses a warm/cool diverging pair; tissue is neutral alabaster so risk colours are the only signal. */
+:root{
+  --ui:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --bg:#e8edf4; --pn:#fff; --pn2:#f3f6fa; --tx:#0d1624; --mu:#556275; --bd:#d3dce8; --ac:#0a67c2; --ac-ink:#fff;
+  --cv:#dbe4f0; --cv-hi:#eef3fa; --r0:#119b78; --r1:#d99a10; --r2:#c52a38; --pos:#c8372f; --neg:#1d6fd6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#c98500;
+  --warn:#f5b800; --warn-ink:#201700; --lv:#2171b5;
+  --t-tissue:#a89d97; --t-vein:#5d7299; --t-cond:#d99f00; --t-valve:#c4b384; --t-lm:#7f8da3; --t-glass:.32;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#080c14; --pn:#0f1623; --pn2:#151e2e; --tx:#e6ecf5; --mu:#8b98ad; --bd:#212c40; --ac:#5ab0ff; --ac-ink:#04101f;
+  --cv:#04070d; --cv-hi:#0d1626; --r0:#1fb892; --r1:#f2b632; --r2:#e04555; --pos:#ef5b6a; --neg:#58a6ff;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --lv:#6baed6;
+  --t-tissue:#cdbfb8; --t-vein:#7c93bd; --t-cond:#ffd23f; --t-valve:#e9dcae; --t-lm:#c3cddc; --t-glass:.3; color-scheme:dark}}
+:root[data-theme=dark]{
+  --bg:#080c14; --pn:#0f1623; --pn2:#151e2e; --tx:#e6ecf5; --mu:#8b98ad; --bd:#212c40; --ac:#5ab0ff; --ac-ink:#04101f;
+  --cv:#04070d; --cv-hi:#0d1626; --r0:#1fb892; --r1:#f2b632; --r2:#e04555; --pos:#ef5b6a; --neg:#58a6ff;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --lv:#6baed6;
+  --t-tissue:#cdbfb8; --t-vein:#7c93bd; --t-cond:#ffd23f; --t-valve:#e9dcae; --t-lm:#c3cddc; --t-glass:.3; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.mu{color:var(--mu)}.sm{font-size:12px}
+/* chrome */
+.wrap{max-width:1560px;margin:0 auto;padding-inline:16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}.brand svg{flex:none}
+.brand b{font-size:17px;letter-spacing:-.01em;display:block;line-height:1.1}.brand span{font-size:12px;color:var(--mu)}
+.top-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dis{background:var(--warn);color:var(--warn-ink);font-size:12.5px;font-weight:600;padding:8px 16px;text-align:center;line-height:1.35}
+.btn{background:var(--pn2);border:1px solid var(--bd);border-radius:9px;padding:6px 11px;font-weight:600;font-size:13px;cursor:pointer;color:var(--tx);display:inline-flex;align-items:center;gap:6px;line-height:1.2}
+.btn:hover{border-color:var(--ac)}.btn:disabled{opacity:.5;cursor:default}
+.btn.pri{background:var(--ac);border-color:var(--ac);color:var(--ac-ink)}
+.btn[aria-pressed=true]{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 16%,var(--pn2))}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:99px;padding:1px 9px;font-size:11.5px;font-weight:600;background:var(--pn2);border:1px solid var(--bd);white-space:nowrap}
+.app{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(370px,.8fr);gap:16px;align-items:start;padding-block:14px 8px}
+.card{background:var(--pn);border:1px solid var(--bd);border-radius:12px;padding:14px;min-width:0}
+.k{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--mu);font-weight:600;margin:0 0 8px}
+h1,h2,h3{margin:0}h2.t{font-size:15px;letter-spacing:-.005em}
+.side{display:grid;gap:12px;min-width:0}
+/* 3D stage */
+.stagecol{position:sticky;top:calc(10px + env(safe-area-inset-top,0px))}
+#v{position:relative;height:clamp(460px,calc(100dvh - 170px),860px);border-radius:14px;overflow:hidden;border:1px solid var(--bd);touch-action:none;
+  background:radial-gradient(120% 95% at 50% 40%,var(--cv-hi),var(--cv) 68%);cursor:grab}
+#v.drag{cursor:grabbing}#v.hov{cursor:pointer}
+#v canvas{display:block;width:100%;height:100%;outline-offset:-3px}
+.chip{position:absolute;left:0;top:0;transform:translate(-100px,-100px);display:flex;gap:6px;align-items:center;padding:3px 10px 3px 8px;border-radius:99px;
+  background:var(--c,#444);color:var(--ink,#fff);font:600 12px/1.2 var(--mono);border:2px solid color-mix(in srgb,#fff 70%,transparent);cursor:pointer;white-space:nowrap;
+  box-shadow:0 1px 8px #0006;transition:opacity .2s;will-change:transform}
+.chip.back{opacity:.4}.chip.on{outline:2px solid var(--ac);outline-offset:2px}.chip i{font-style:normal;font-size:10px}
+.chip .ca{font-weight:500;opacity:.85}
+.vinfo{position:absolute;left:12px;top:12px;max-width:min(300px,calc(100% - 150px));display:grid;gap:6px;pointer-events:none}
+.vcard{background:color-mix(in srgb,var(--pn) 82%,transparent);backdrop-filter:blur(8px);border:1px solid var(--bd);border-radius:11px;padding:9px 11px}
+.vcard .nm{font-weight:700;font-size:13.5px;line-height:1.2}.vcard .ds{font-size:12px;color:var(--mu);margin-top:2px}
+.vcard .pv{display:flex;align-items:baseline;gap:8px;margin-top:4px}.vcard .pv b{font:600 26px/1 var(--mono)}
+.ramp{position:relative;height:10px;border-radius:6px;margin:24px 0 6px;background:var(--ramp)}
+.ramp s{position:absolute;top:-5px;width:2px;height:20px;background:var(--tx);border-radius:1px;transform:translateX(-1px);text-decoration:none}
+.ramp s em{white-space:nowrap;position:absolute;top:-19px;left:50%;transform:translateX(-50%);font:600 10px/1 var(--mono);font-style:normal;color:var(--tx)}
+.ramp-l{display:flex;justify-content:space-between;font:500 10px/1 var(--mono);color:var(--mu)}
+.hud{position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;pointer-events:none}
+.hud>*{pointer-events:auto}
+.hud .grp{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.hud .btn,.seg{background:color-mix(in srgb,var(--pn) 78%,transparent);backdrop-filter:blur(8px)}
+.seg{display:inline-flex;border:1px solid var(--bd);border-radius:9px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:6px 10px;font-weight:600;font-size:13px;cursor:pointer;color:var(--mu)}
+.seg button[aria-checked=true]{background:var(--ac);color:var(--ac-ink)}
+.hint{font-size:11.5px;color:var(--mu);background:color-mix(in srgb,var(--pn) 70%,transparent);border-radius:8px;padding:3px 8px;pointer-events:none}
+.note{position:absolute;left:50%;top:12px;transform:translateX(-50%);font-size:12px;font-weight:600;background:var(--ac);color:var(--ac-ink);padding:4px 11px;border-radius:99px;pointer-events:none}
+.tip{position:absolute;pointer-events:none;background:var(--pn);border:1px solid var(--bd);border-radius:8px;padding:4px 8px;font-size:12px;font-weight:600;box-shadow:0 4px 18px #0005;transform:translate(12px,12px);white-space:nowrap;z-index:3}
+.lyr{position:absolute;left:12px;bottom:58px;background:var(--pn);border:1px solid var(--bd);border-radius:11px;padding:10px 12px;display:grid;gap:5px;min-width:210px;box-shadow:0 8px 28px #0006;z-index:4}
+.lyr label{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}.lyr i{width:10px;height:10px;border-radius:3px;display:inline-block;background:var(--c)}
+.fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--mu)}
+.atlas{position:absolute;right:12px;top:12px;font-size:10.5px;color:var(--mu);text-align:right;pointer-events:none;max-width:130px;line-height:1.3}
+.soft .vcard,.soft .hud .btn,.soft .seg{backdrop-filter:none}.soft .vcard{background:color-mix(in srgb,var(--pn) 93%,transparent)}.soft .hud .btn,.soft .seg{background:var(--pn)}
+/* risk */
+.hero{display:grid;gap:10px}
+.hero-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.bigp{font:600 46px/0.9 var(--mono);letter-spacing:-.03em}
+.meter{position:relative;height:10px;border-radius:6px;background:var(--ramp);margin:6px 0 2px}
+.meter b{position:absolute;top:-5px;width:4px;height:20px;border-radius:2px;background:var(--tx);box-shadow:0 0 0 2px var(--pn);transform:translateX(-2px)}
+.meter u{position:absolute;top:0;bottom:0;width:2px;background:var(--pn);opacity:.9;text-decoration:none}
+.mlab{display:flex;justify-content:space-between;font:500 10.5px/1 var(--mono);color:var(--mu)}
+.vrows{display:grid;gap:4px}
+.vr{display:grid;grid-template-columns:42px minmax(0,1fr) 54px 108px;gap:8px;align-items:center;padding:7px 8px;border-radius:10px;cursor:pointer;border:1px solid transparent}
+.vr:hover,.hb:hover{background:var(--pn2)}.vr[aria-checked=true],.hb[aria-checked=true]{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,var(--pn))}
+.vr b{font:700 13px var(--mono)}.vr .pv{font:600 15px var(--mono);text-align:right}
+.vr .nm{display:grid;gap:4px;min-width:0}.vr .nm span{font-size:12px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb{border:1px solid var(--bd);border-radius:10px;padding:10px;cursor:pointer}
+.t2{font-weight:700;font-size:14px;line-height:1.2}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;border-radius:6px}
+.band{font-size:12px;font-weight:600;white-space:nowrap}.band i{font-style:normal;margin-right:3px}
+.ia{display:flex;gap:14px;align-items:center;margin-top:6px}.ia svg{flex:none;width:112px;height:112px}.ia p{margin:0;font-size:12.5px}
+/* explanation */
+.fr{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.7fr) minmax(0,1.2fr) 46px;gap:8px;align-items:center;padding:3px 0;font-size:12.5px}
+.fr span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fr em{font-style:normal;color:var(--mu);font-family:var(--mono);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fr b{text-align:right;font:600 12px var(--mono)}
+.dv{position:relative;height:9px;background:var(--pn2);border-radius:5px;border:1px solid var(--bd)}
+.dv:after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--mu)}.dv i{position:absolute;top:0;bottom:0;border-radius:4px}
+.legend{display:flex;gap:14px;font-size:11.5px;color:var(--mu);margin:2px 0 6px;flex-wrap:wrap}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.warn{background:color-mix(in srgb,var(--warn) 22%,var(--pn));border:1px solid var(--warn);border-radius:9px;padding:6px 9px;font-size:12px;margin-top:8px}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+#wc .chart{max-width:560px;margin-inline:auto}
+.chart text{font:500 10px var(--mono);fill:var(--mu)}
+.ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+select{background:var(--pn2);border:1px solid var(--bd);border-radius:8px;padding:5px 8px;max-width:100%;color:var(--tx)}
+details{border-top:1px solid var(--bd);padding:7px 0}summary{cursor:pointer;font-weight:600;font-size:13px;display:flex;justify-content:space-between;gap:8px}
+summary .mu{font-weight:400;font-family:var(--mono);font-size:11px}
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;padding-top:8px}
+.sl{display:block;font-size:12px;min-width:0}.sl output{float:right;color:var(--mu);font-family:var(--mono)}.sl input{width:100%;accent-color:var(--ac)}.tg{font-size:12.5px;display:flex;gap:6px;align-items:center}
+.ps{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}.tbl th,.tbl td{padding:5px 8px;text-align:right;border-bottom:1px solid var(--bd);font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tbl th:first-child,.tbl td:first-child{text-align:left;font-family:var(--ui);font-weight:600}.tbl th{color:var(--mu);font-weight:600;font-size:11px;font-family:var(--ui)}
+.scrollx{overflow-x:auto}
+/* bench */
+.bench{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.8fr);gap:16px;padding-block:8px 18px}
+.bar-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+#sc{display:none;border-radius:8px;background:#000;image-rendering:pixelated;max-width:100%;cursor:crosshair}
+#scw{position:relative;display:inline-block;max-width:100%;line-height:0;vertical-align:top}
+#hxs{position:absolute;left:0;top:0;overflow:visible;display:none;pointer-events:none}
+.hxd{fill:rgba(0,0,0,.4);pointer-events:none}.hxo{fill:none;stroke:#000;stroke-opacity:.6;stroke-width:4;pointer-events:none}
+.hxr{fill:transparent;stroke:#fff;stroke-width:1.75;cursor:move;pointer-events:all;touch-action:none;outline:none}.hxr.out{stroke-dasharray:7 5;stroke-opacity:.85}.hxr:focus-visible{stroke:#ffd84d;stroke-width:2.75}
+.hxe,.hxg{pointer-events:all;touch-action:none}.hxe{fill:transparent}.hxg .t{fill:transparent}.hxg .v{fill:#fff;stroke:#000;stroke-width:1.2}
+.hxe[data-h=n],.hxe[data-h=s],.hxg[data-h=n],.hxg[data-h=s]{cursor:ns-resize}.hxe[data-h=e],.hxe[data-h=w],.hxg[data-h=e],.hxg[data-h=w]{cursor:ew-resize}.hxg[data-h=nw],.hxg[data-h=se]{cursor:nwse-resize}.hxg[data-h=ne],.hxg[data-h=sw]{cursor:nesw-resize}
+#hxs.drag .hxr{stroke:#ffd84d}
+.drop{border:1.5px dashed var(--bd);border-radius:10px;padding:10px;text-align:center}.drop.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 8%,transparent)}
+#lg{display:grid;gap:0}#lgw{max-height:230px;overflow:auto}
+.lg{font-size:12px;border-top:1px solid var(--bd);padding:5px 0}.lg code{display:block;color:var(--mu);word-break:break-all;font-family:var(--mono);font-size:11px}
+.tag{background:var(--pn2);border:1px solid var(--bd);border-radius:6px;padding:0 6px;font-size:11px}
+.meter2{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.meter2 div{background:var(--pn2);border:1px solid var(--bd);border-radius:9px;padding:6px 9px}.meter2 b{font:600 17px var(--mono);display:block}.meter2 span{font-size:11px;color:var(--mu)}
+pre{max-height:240px;overflow:auto;background:var(--pn2);border:1px solid var(--bd);padding:8px;border-radius:8px;font:11.5px/1.4 var(--mono);white-space:pre-wrap}
+footer{font-size:12px;color:var(--mu);padding-block:6px 28px;line-height:1.55}footer a{color:var(--ac)}
+/* modals */
+.modal{position:fixed;inset:0;background:#000b;display:none;place-items:center;z-index:50;padding:16px;overflow:auto}.modal.on{display:grid}
+.modal .card{max-width:min(980px,100%);width:100%;max-height:calc(100dvh - 32px);overflow:auto}
+#md .card{max-width:540px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.x{margin-left:auto}
+.imp{display:grid;grid-template-columns:minmax(0,1fr) 1.2fr 42px;gap:8px;align-items:center;font-size:12.5px;padding:2px 0}.imp .bar i{background:var(--ac)}
+/* cardiac MRI panel (cineui.js). --lv (sequential blue) = left-ventricle cavity; the teal -> amber -> red ramp stays reserved for probability */
+#cine{grid-column:1/-1}
+.cgrid{display:grid;grid-template-columns:minmax(280px,420px) minmax(0,1fr);gap:18px;margin-top:10px;align-items:start}
+.cview{display:grid;gap:8px;min-width:0}
+.cstage{position:relative;width:100%;aspect-ratio:1/1;background:#000;border-radius:8px;overflow:hidden;border:1px solid var(--bd)}
+.cstage canvas{display:block;width:100%;height:100%}
+.cctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.cview .sl{display:grid;gap:3px;font-weight:600}
+.cch{display:flex;flex-wrap:wrap;gap:4px}
+#cine .cc1{display:grid;justify-items:center;gap:4px}
+#cine .cc1 button{min-width:32px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--bd);background:var(--pn2);color:var(--tx);font:600 12px var(--mono);cursor:pointer}
+#cine .cc1 button:hover{border-color:var(--ac)}
+#cine .cc1.cur button{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 18%,var(--pn2))}
+#cine .cc1 input{width:20px;height:20px;margin:0;accent-color:var(--ac);cursor:pointer}
+#cine .cprog{display:inline-block;width:110px;height:6px;border-radius:4px;background:var(--bd);overflow:hidden;vertical-align:middle;margin-left:6px}
+#cine .cprog i{display:block;height:100%;background:var(--ac);transition:width .2s}
+#cine .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:8px}
+#cine .tile{background:var(--pn2);border:1px solid var(--bd);border-radius:10px;padding:8px 10px;min-width:0}
+#cine .tile b{display:block;font:600 24px/1.1 var(--mono);letter-spacing:-.02em}
+#cine .tile b small{font:500 12px var(--mono);color:var(--mu);margin-left:2px;letter-spacing:0}
+#cine .tile span{display:block;font-size:12px;color:var(--mu);margin-top:2px}
+#cine .tile em{display:block;font:500 11px var(--mono);font-style:normal;color:var(--tx);margin-top:2px}
+#cine .gauge{position:relative;height:12px;border-radius:6px;background:var(--pn2);border:1px solid var(--bd);margin:14px 0 4px}
+#cine .gauge i{position:absolute;display:block;padding:0;font-style:normal}
+#cine .gauge i.gn{top:0;bottom:0;background:color-mix(in srgb,var(--mu) 30%,transparent)}
+#cine .gauge i.gr{top:2px;bottom:2px;border-radius:3px;background:var(--lv)}
+#cine .gauge b{position:absolute;top:-5px;width:4px;height:20px;border-radius:2px;background:var(--tx);box-shadow:0 0 0 2px var(--pn);transform:translateX(-2px)}
+#cine .gl2{display:flex;justify-content:space-between;font:500 10.5px/1 var(--mono);color:var(--mu)}
+#cvc{position:relative;max-width:720px;margin-bottom:6px}
+#cvc .chart{cursor:crosshair}
+#cvc .chart text.lb{fill:var(--tx);font-weight:600}
+#cvc .chart text.ms{font-size:9px}
+#cvc .chart .gl{stroke:var(--bd);stroke-width:1}
+#cvc .chart .ln{fill:none;stroke:var(--lv);stroke-width:2.4;stroke-linejoin:round}
+#cvc .chart .band2{fill:color-mix(in srgb,var(--lv) 22%,transparent);stroke:none}
+#cvc .chart .pt{fill:var(--lv)}
+#cvc .chart .mk{fill:var(--pn);stroke:var(--tx);stroke-width:2}
+#cvc .chart .ph{stroke:var(--tx);stroke-width:1.2;stroke-dasharray:3 3;opacity:.7}
+#cvc .chart .phc{fill:var(--tx);stroke:var(--pn);stroke-width:2}
+.tip2{position:absolute;top:6px;z-index:3;pointer-events:none;background:var(--pn);border:1px solid var(--bd);border-radius:8px;padding:4px 8px;font-size:12px;font-weight:600;box-shadow:0 4px 18px #0005;white-space:nowrap}
+#cine .lgd{display:inline-block;width:18px;vertical-align:middle;margin:0 5px 0 8px}
+#cine .lgd:first-child{margin-left:0}
+#cine .lgd.ln{height:0;border-top:3px solid var(--lv)}
+#cine .lgd.bd{height:10px;border-radius:2px;background:color-mix(in srgb,var(--lv) 25%,transparent);border:1px solid color-mix(in srgb,var(--lv) 55%,transparent)}
+@media(max-width:1000px){.app{grid-template-columns:minmax(0,1fr)}.stagecol{position:static}#v{height:min(66dvh,560px);min-height:380px}.bench{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:1001px){#cine{order:3}}
+@media(max-width:720px){.cgrid{grid-template-columns:minmax(0,1fr)}.cview{max-width:480px}}
+@media(max-width:560px){#cine .tile b{font-size:22px}#lvc .lvx{display:none}.gr{grid-template-columns:1fr}.vr{grid-template-columns:38px minmax(0,1fr) 48px 24px}.vr .nm span,.vr .band span{display:none}.fr{grid-template-columns:minmax(0,1.1fr) minmax(0,.6fr) minmax(0,1fr) 40px;gap:5px}
+  .bigp{font-size:40px}.hint,.atlas{display:none}.vinfo{max-width:calc(100% - 24px)}.vinfo .vcard:nth-child(2){display:none}.vcard .ds{display:none}.meter2{grid-template-columns:1fr}.hud{gap:6px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <div class="brand">
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="var(--ac)" stroke-width="2"/><path d="M5 18h6l3-7 5 14 3-9 2 2h5" fill="none" stroke="var(--tx)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><b>CardioLens 3D</b><span>Coronary risk studio · LAD · LCX · RCA</span></div>
+  </div>
+  <div class="top-r">
+    <span class="pill" id="api" title="In-browser engine (verified against the scikit-learn pipelines to 1e-9).">Engine: in-browser</span>
+    <button class="btn" id="mcb" type="button">Model card</button>
+    <button class="btn" id="thm" type="button" aria-label="Toggle light or dark theme">Theme</button>
+  </div>
+</header>
+<div class="dis" role="note"><strong>Educational decision support only.</strong> Not a substitute for formal diagnostic imaging or clinical judgement. Research prototype trained on 303 patients; LCX and RCA estimates are only modestly accurate.</div>
+<main class="wrap">
+  <div class="app">
+    <section class="stagecol" aria-label="3D heart">
+      <div id="v">
+        <div class="vinfo">
+          <div class="vcard" id="vi" aria-live="polite"></div>
+          <div class="vcard"><div class="k" style="margin:0">Predicted stenosis probability</div><div class="ramp" id="rp"></div><div class="ramp-l"><span>0%</span><span>50%</span><span>100%</span></div></div>
+          <div class="vcard" id="lvc" hidden></div>
+        </div>
+        <div class="atlas">Generic adult atlas heart (BodyParts3D). Not this patient's anatomy.</div>
+        <div class="note" id="nt" hidden></div>
+        <div class="tip" id="tip" hidden></div>
+        <div class="lyr" id="lyr" hidden></div>
+        <div class="hud">
+          <div class="grp">
+            <button class="btn" id="rs" type="button">Reset view</button>
+            <span class="seg" role="radiogroup" aria-label="Tissue display"><button type="button" role="radio" data-m="solid" aria-checked="false">Solid</button><button type="button" role="radio" data-m="glass" aria-checked="true">Glass</button><button type="button" role="radio" data-m="ghost" aria-checked="false">Vessels</button></span>
+            <button class="btn" id="lyb" type="button" aria-expanded="false">Layers</button>
+            <button class="btn" id="ta" type="button" aria-pressed="false" title="Illustrative: how the model's estimate changes with age alone">Age +20 y</button>
+            <button class="btn" id="lvb" type="button" aria-pressed="false" title="Show or hide your own left ventricle, measured from the cardiac MRI below" hidden>My LV</button>
+          </div>
+          <span class="hint">Drag rotate · wheel zoom · right-drag pan · click a vessel</span>
+        </div>
+      </div>
+    </section>
+    <section class="side" aria-label="Clinical dashboard">
+      <div class="card hero">
+        <div class="k">Predicted risk · tap a row to inspect</div>
+        <div id="risk"></div>
+        <div class="ia" id="ia"></div>
+        <div class="sm mu" id="mc"></div><div id="oor"></div>
+      </div>
+      <div class="card"><div class="k" id="dt">Why</div><div id="dr"></div><div class="k" style="margin-top:12px">By clinical domain</div><div id="gp"></div>
+        <div class="sm mu" style="margin-top:8px">Bars show each measurement's contribution to the model's log-odds (SHAP, exact for this linear model). They are statistical associations in a 303-patient referral cohort, not causal effects: for example, atypical chest pain lowers CAD odds in this cohort.</div></div>
+      <div class="card"><div class="k">What-if curve</div>
+        <div class="ctl"><label for="wf" class="sr">Measurement to vary</label><select id="wf"></select><span class="sm mu">other inputs held at the current values</span></div>
+        <div id="wc"></div><div class="sm mu" id="wi" style="margin-top:6px"></div></div>
+      <div class="card"><div class="k">Patient inputs</div><div class="ps" id="ps"></div><div id="in"></div></div>
+    </section>
+  </div>
+  <div class="bench">
+    <section class="card" id="room" aria-label="Scan reading room">
+      <div class="k">Scan reading room · CT volume (NIfTI or DICOM) · decoded in this tab, never uploaded</div>
+      <div class="drop" id="dz">
+        <div class="bar-row" style="justify-content:center;margin-bottom:0">
+          <label class="btn pri" for="fl">Open CT or MRI files</label><input type="file" id="fl" multiple class="sr">
+          <label class="btn" for="fd">Open a folder</label><input type="file" id="fd" webkitdirectory class="sr">
+          <button class="btn" id="dm" type="button">Load synthetic phantom</button><button class="btn" id="fc" type="button">Find calcifications</button>
+        </div>
+        <div class="sm mu" style="margin-top:6px">Drop a NIfTI CT (.nii / .nii.gz), DICOM files (.dcm or no extension), a folder or a .zip here. A CT series opens in this reading room; a cardiac cine MR series opens in the Cardiac MRI panel.</div>
+      </div>
+      <div class="bar-row" style="margin-top:8px"><button class="btn" data-v="axial" type="button">Axial</button><button class="btn" data-v="coronal" type="button">Coronal</button><button class="btn" data-v="sagittal" type="button">Sagittal</button>
+        <label for="wl" class="sr">Window preset</label><select id="wl"><option>Soft tissue</option><option>Calcium</option><option>Lung</option></select><span class="mu sm mono" id="sn"></span></div>
+      <div class="bar-row" id="hxr" style="margin-bottom:2px"><span class="k" style="margin:0">Heart box</span>
+        <button class="btn" id="hxa" type="button" disabled title="A rough guess from the lungs, or the middle of the scan when no lungs are found. Not a segmentation: drag the box onto the heart.">Suggest heart box</button>
+        <button class="btn" id="hxw" type="button" disabled title="No region limit: everything above the threshold counts">Whole scan</button>
+        <span class="mu sm mono" id="hxt" aria-live="polite"></span></div>
+      <div class="sm mu" id="hxn" style="margin-bottom:6px"></div>
+      <div id="scw"><canvas id="sc" aria-label="CT slice"></canvas><svg id="hxs" aria-label="Heart box"></svg></div><input type="range" id="sl" min="0" max="0" value="0" style="width:100%;accent-color:var(--ac)" aria-label="Slice">
+      <div id="rg" style="margin-top:6px" aria-live="polite"></div>
+    </section>
+    <section class="card" id="cine" aria-label="Cardiac MRI">
+      <div class="k">Cardiac MRI · short-axis cine · left-ventricle volumes and ejection fraction · decoded in this tab, never uploaded</div>
+      <div class="drop" id="cz">
+        <div class="bar-row" style="justify-content:center;margin-bottom:0">
+          <label class="btn pri" for="cf">Open cine DICOM files</label><input type="file" id="cf" multiple class="sr">
+          <label class="btn" for="cd">Open a folder</label><input type="file" id="cd" webkitdirectory class="sr">
+          <button class="btn" id="cs" type="button" title="A public-domain cine MRI of a 27-year-old man (Sunnybrook Cardiac Data), built into this page">Load sample</button>
+        </div>
+        <div class="sm mu" id="cmsg" style="margin-top:8px" aria-live="polite"></div>
+      </div>
+      <div id="cb" hidden>
+        <div class="cgrid">
+          <div class="cview">
+            <div class="cstage"><canvas id="cc" role="img" aria-label="Short-axis cine MRI frame with the traced left-ventricle contour"></canvas></div>
+            <div class="sm mono" id="ccl" aria-live="off"></div>
+            <div class="sm mu" id="cinfo"></div>
+            <div class="cctl">
+              <button class="btn" id="cpl" type="button" aria-pressed="false">Play</button>
+              <label class="sm mu" for="cspd">Speed</label><select id="cspd"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+              <label class="tg"><input type="checkbox" id="cgh" checked>ED / ES outlines</label>
+            </div>
+            <label class="sl">Slice<input type="range" id="csl" min="0" max="0" value="0"></label>
+            <label class="sl">Cardiac phase (time after the R wave)<input type="range" id="cph" min="0" max="0" value="0"></label>
+            <div class="k" style="margin:2px 0 0">Slices · tick = counted in the volume</div>
+            <div class="cch" id="cch"></div>
+            <div class="bar-row" style="margin:2px 0 0"><button class="btn" id="cct" type="button" aria-pressed="false" title="If the automatic tracing picked the wrong structure, click inside the left-ventricle blood pool to measure again from there">Pick the LV centre</button><span class="sm mu" id="cctn" aria-live="polite"></span></div>
+          </div>
+          <div id="cres" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+    <section class="card" id="agent" aria-label="Agent">
+      <div class="k">Agent · WebMCP tools (numbers only)</div>
+      <div class="sm mu">Any WebMCP agent sees measurements and JSON, never the scan or the mesh. <b>export_findings</b> blocks until you approve.</div>
+      <div class="meter2" aria-label="Boundary meter"><div><b id="pm1">0</b><span>tool results returned</span></div><div><b id="pm2">0 B</b><span>total size</span></div><div><b id="pm3">0</b><span>payloads blocked by guard</span></div></div>
+      <div class="bar-row"><button class="btn pri" id="run" type="button">Run demo agent</button><span class="tag" id="wm"></span></div>
+      <div id="say" class="sm" style="margin-bottom:6px" aria-live="polite"></div>
+      <div id="lgw"><div id="lg"></div></div>
+      <details><summary>Registered tools <span class="mu" id="tc"></span></summary><div id="tl" class="sm"></div></details>
+    </section>
+  </div>
+  <footer>
+    <div><strong>Data &amp; credits.</strong> Clinical model: Extension of Z-Alizadeh Sani dataset (UCI #411, 303 patients). 3D anatomy: BodyParts3D © Life Science Integrated Database Center, licensed CC BY-SA 2.1 Japan, via the Interactive-3D-Human-Heart-Visualization repository. Agent plumbing: WebMCP core (MIT); reading-room design inspired by Faraday (MIT). Rendering: three.js r128 (MIT). Cardiac MRI sample: Sunnybrook Cardiac Data (public domain, CC0 1.0, via the Cardiac Atlas Project): Radau P, Lu Y, Connelly K, Paul G, Dick AJ, Wright GA. Evaluation Framework for Algorithms Segmenting Short Axis Cardiac MRI. The MIDAS Journal, Cardiac MR Left Ventricle Segmentation Challenge, 2009 (<a href="https://hdl.handle.net/10380/3070" target="_blank" rel="noopener">hdl:10380/3070</a>).</div>
+    <div>The CT module is a threshold-based demonstration and the Agatston-style score is simplified and unvalidated. The cardiac-MRI module is an automatic classical image-processing estimate, not validated; the patient's left ventricle is placed in the generic atlas heart by its centre and long axis, which is not an anatomical registration. Nothing on this page is a diagnosis.</div>
+  </footer>
+</main>
+<div class="modal" id="md" role="dialog" aria-modal="true" aria-labelledby="mdt"><div class="card"><div class="k" id="mdt">Human approval required</div><p>The agent requested <b>export_findings</b>. Nothing leaves this page until you approve. The contents are only the JSON below: no scan, mesh or patient-level records.</p><pre id="mj"></pre><div class="bar-row" style="margin:10px 0 0"><button class="btn pri" id="ok" type="button">Approve export</button><button class="btn" id="no" type="button">Deny</button></div></div></div>
+<div class="modal" id="mcm" role="dialog" aria-modal="true" aria-labelledby="mct"><div class="card" id="mcc"></div></div>
+<noscript><div class="wrap card">This page needs JavaScript (and WebGL for the 3D view).</div></noscript>
+<script>/*ENGINE*/</script>
+<script>const M=/*MODEL*/;</script>
+<script>/*SCAN*/</script>
+<script>/*DICOM*/</script>
+<script>/*CINE*/</script>
+<script>const CINE_SAMPLE=/*CINESAMPLE*/;</script>
+<script>/*WEBMCP*/</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/*CORE*/
+/*CHARTS*/
+/*SCENE*/
+/*ROOM*/
+/*CINEUI*/
+/*BOOT*/
+</script>
+</body>
+</html>

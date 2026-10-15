@@ -1,0 +1,902 @@
+[
+ {
+  "check": "page loads with no script errors",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "real anatomy mesh is on screen (>50k triangles)",
+  "pass": true,
+  "detail": "{'fps': 23, 'pixel_ratio': 0.48, 'quality': 0.48, 'software_renderer': True, 'degraded': True, 'triangles': 54487}"
+ },
+ {
+  "check": "canvas has real size",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "13 WebMCP tools registered",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "WebMCP badge shows tool count",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "disclaimer banner is always visible",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "generic-atlas note is on the stage",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "default CAD risk is a probability",
+  "pass": true,
+  "detail": "0.37693017214965424"
+ },
+ {
+  "check": "38% (Intermediate) is amber, not green",
+  "pass": true,
+  "detail": "[241, 175, 52]"
+ },
+ {
+  "check": "20% (Low) is teal",
+  "pass": true,
+  "detail": "[47, 184, 138]"
+ },
+ {
+  "check": "90% (High) is red",
+  "pass": true,
+  "detail": "[225, 76, 83]"
+ },
+ {
+  "check": "theme toggle sets data-theme",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "risk ramp variable is built",
+  "pass": true,
+  "detail": "linear-gradient(90deg,rgb(17,155,120) 0.0%,rgb(41,155,108) 3"
+ },
+ {
+  "check": "row click selects the vessel",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "camera flew to the vessel",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "camera never goes below the heart",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "stage card names the vessel",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "hero chip is highlighted",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "LAD row selects and updates the explanation",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "LCX row selects and updates the explanation",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "vessel chip button selects the vessel",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "a vessel can be hit-tested on the canvas",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "hover tooltip shows the vessel probability",
+  "pass": true,
+  "detail": "LCX \u00b7 20% \u00b7 click to inspect"
+ },
+ {
+  "check": "clicking the vessel in 3D selects it",
+  "pass": true,
+  "detail": "LCX vs LCX"
+ },
+ {
+  "check": "anatomical tissue can be hit-tested",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "clicking tissue explains the region and says it is orientation only",
+  "pass": true,
+  "detail": "Aorta and pulmonary trunkAortic bulb and ascending aorta (where both coronary ar"
+ },
+ {
+  "check": "selecting a vessel clears the region card",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Solid mode applies",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Vessels mode applies",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Glass mode applies",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Layers popover opens",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "unchecking a layer hides the mesh",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Show all restores every layer",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Escape closes the Layers popover",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "arrow keys rotate the heart",
+  "pass": true,
+  "detail": "0.120"
+ },
+ {
+  "check": "plus zooms in",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "mouse wheel zooms",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "0 resets the view",
+  "pass": true,
+  "detail": "{'az': 0.9250158554832726, 'el': 0.10425854004492792, 'D': 5.22046481285922, 't': [0.24024159675957582, -0.024628463730835874, 0.2629758854905208]}"
+ },
+ {
+  "check": "dragging orbits the camera",
+  "pass": true,
+  "detail": "az 0.503 -> -0.232"
+ },
+ {
+  "check": "raising age raises CAD probability",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "a preset profile loads",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Reset restores the default profile",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Age +20 y animates age by 20 years",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "time-lapse is labelled illustrative",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Back to now restores the original age and hides the note",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "time-lapse raised the estimate",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "what-if curve redraws for the chosen measurement",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "what-if chart has a values table",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Model card opens as a dialog",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Model card shows ROC and calibration charts",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Model card lists AUC for every target",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Model card switches target",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Model card states the tuning metric consistently (log-loss, never 'ROC-AUC tuning')",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Escape closes the Model card",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "no script errors during interaction",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "before a scan is loaded the reading room says so",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "describe_scan without a scan explains what to do",
+  "pass": true,
+  "detail": "{'content': [{'type': 'text', 'text': 'No scan is loaded. Ask the user to open a CT (NIfTI, DICOM files, a folder or a ."
+ },
+ {
+  "check": "phantom loads into the viewer",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "describe_scan returns dimensions and HU range only (a few hundred bytes, no arrays)",
+  "pass": true,
+  "detail": "775"
+ },
+ {
+  "check": "calcium finder lists regions with scores",
+  "pass": true,
+  "detail": "3"
+ },
+ {
+  "check": "find_calcifications returns measurements per region",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "score is labelled simplified/unvalidated",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "assigning a lesion to LAD marks the 3D chip with its Ca score",
+  "pass": true,
+  "detail": "['\u25cfLAD 32% \u00b7 Ca 617', '\u25cfLCX 20%', '\u25cfRCA 20%']"
+ },
+ {
+  "check": "unknown region id lists the valid ids",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "inverted HU window is rejected with a fix",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "bad vessel name is rejected with the valid options",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "unknown feature is rejected with the valid keys",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "plane buttons switch the view",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "scrolling the slice canvas changes the slice",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "pointer probe shows a Hounsfield value",
+  "pass": true,
+  "detail": "coronal 50/96 \u00b7 voxel 49,49,23 \u00b7 82 HU"
+ },
+ {
+  "check": "window presets apply",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "focus_region highlights a region",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "a real CT slab (NIfTI .gz) is parsed",
+  "pass": true,
+  "detail": "{'content': [{'type': 'text', 'text': '\"CT volume (NIfTI)\": 512 \u00d7 512 \u00d7 16 voxels at 0.49 \u00d7 0.49 \u00d7 2.5 mm (field of view 250 \u00d7 250 \u00d7 38 mm). Range -80"
+ },
+ {
+  "check": "calcium finder runs on the real slab without error",
+  "pass": true,
+  "detail": "{'content': [{'type': 'text', 'text': 'Found 76 candidate(s) at 130 HU or more; showing 3. Agatston-style total 83994.6 (simplified, unvalidated). max_extent_mm is an axis-aligned box side, not a cali"
+ },
+ {
+  "check": "a malformed file shows a readable error and does not crash",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "the page still works after a bad file",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "no script errors during the scan flow",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "NIfTI opens from the main file button with a neutral label",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "DICOM files without extension open as one CT series",
+  "pass": true,
+  "detail": "128,112,60"
+ },
+ {
+  "check": "a folder opens as a CT series (name of the folder not shown)",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "a .zip opens as a CT series",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "a DICOM cine goes to the Cardiac MRI panel and the CT stays loaded",
+  "pass": true,
+  "detail": "{'content': [{'type': 'text', 'text': '\"MRI cine (DICOM)\": 4 slices \u00d7 6 phases, 48\u00d748 px at 1.5 mm, slice spacing 10 mm, 66.7 bpm. The left ventricle has been measured: call measure_lv for the numbers"
+ },
+ {
+  "check": "a mixed selection says so and names the next step",
+  "pass": true,
+  "detail": "Could not open the selection: This selection mixes CT images (1) and MR images (1). Next step: open one series at a time: the CT folder for calcium, or the cine"
+ },
+ {
+  "check": "whole-scan box: bone-like candidates and the coronary lesions are all listed",
+  "pass": true,
+  "detail": "17"
+ },
+ {
+  "check": "Suggest heart box draws a box with a numeric read-out and says it is a guess",
+  "pass": true,
+  "detail": "x 105\u2013270 \u00b7 y 66\u2013171 \u00b7 z 40\u2013180 mm \u00b7 164 \u00d7 105 \u00d7 140 mm"
+ },
+ {
+  "check": "the suggestion limits the calcium list and reports the excluded count",
+  "pass": true,
+  "detail": "17->6"
+ },
+ {
+  "check": "axial: the box projection is drawn",
+  "pass": true,
+  "detail": "{'x': 173.1607208251953, 'y': 333.7008972167969, 'width': 221.92857360839844, 'height': 142.375}"
+ },
+ {
+  "check": "axial: dragging with the mouse moves the box (read-out: x 124\u2013288 \u00b7 y 79\u2013184 \u00b7 z 40\u2013180 mm \u00b7 164)",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "axial: dragging a corner handle resizes it",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "axial: arrow keys nudge the box",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "coronal: the box projection is drawn",
+  "pass": true,
+  "detail": "{'x': 258.4371337890625, 'y': 328.078125, 'width': 273.76458740234375, 'height': 246.75}"
+ },
+ {
+  "check": "coronal: dragging with the mouse moves the box (read-out: x 143\u2013299 \u00b7 y 79\u2013178 \u00b7 z 30\u2013170 mm \u00b7 155)",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "coronal: dragging a corner handle resizes it",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "coronal: arrow keys nudge the box",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "sagittal: the box projection is drawn",
+  "pass": true,
+  "detail": "{'x': 170.89419555664062, 'y': 346.078125, 'width': 175.04568481445312, 'height': 238.75}"
+ },
+ {
+  "check": "sagittal: dragging with the mouse moves the box (read-out: x 148\u2013297 \u00b7 y 93\u2013192 \u00b7 z 24\u2013159 mm \u00b7 149)",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "sagittal: dragging a corner handle resizes it",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "sagittal: arrow keys nudge the box",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Whole scan restores every candidate",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "a box dragged out of the scan stays inside it",
+  "pass": true,
+  "detail": "{'x': [259.8, 269.8], 'y': [65.6, 170.6], 'z': [40, 180], 'size': [10, 105, 140], 'whole_scan': False, 'source': 'user'}"
+ },
+ {
+  "check": "dragging the box away from the heart changes the calcium list",
+  "pass": true,
+  "detail": "6->0"
+ },
+ {
+  "check": "the list on the page follows the box",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "no script errors",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "all tools are discoverable via WebMCP",
+  "pass": true,
+  "detail": "{'find_calcifications', 'describe_cine', 'set_view', 'describe_scan', 'set_heart_region', 'predict_risk', 'show_lv_3d', 'focus_region', 'focus_vessel', 'assign_vessel', 'describe_heart_model', 'measure_lv', 'export_findings'}"
+ },
+ {
+  "check": "describe_heart_model says the heart is generic and withholds geometry",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "the mesh never appears in any tool result",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "focus_vessel moves the 3D view",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "predict_risk returns probabilities and drivers, not the model",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "what-if override does not change the page state",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "guard blocks an oversized payload",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "guard blocks 'Float32Array'",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "guard blocks 'data:image/png'",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "guard blocks 'ImageData'",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "blocked payloads are counted on the live meter",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "export_findings blocks while waiting for the human",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "approval dialog shows exactly what would leave",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "approval dialog contains no scan data",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Deny returns an error to the agent and exports nothing",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Approve returns the report",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Escape counts as Deny",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "export before measuring is refused with the next step",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "changing the study cancels a pending export",
+  "pass": true,
+  "detail": "{'content': [{'type': 'text', 'text': 'The scan changed during approval; export cancelled. Re-run find_calcifications.'}], 'isError': True}"
+ },
+ {
+  "check": "the approval dialog closes itself on a study change",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "the demo agent log shows the tool sequence",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "the boundary meter counts results and has no bulk data",
+  "pass": true,
+  "detail": "15 results, 8189 bytes"
+ },
+ {
+  "check": "no network request leaves the allow-list (page, three.js, fonts)",
+  "pass": true,
+  "detail": "[]"
+ },
+ {
+  "check": "no POST/PUT of any kind from the standalone page",
+  "pass": true,
+  "detail": "[]"
+ },
+ {
+  "check": "no script errors during agent flows",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "MRI sample loads and is measured in the browser",
+  "pass": true,
+  "detail": "3.7s"
+ },
+ {
+  "check": "sample EF is between 38 and 44 %",
+  "pass": true,
+  "detail": "EF 41.0"
+ },
+ {
+  "check": "sample EDV is between 115 and 130 mL",
+  "pass": true,
+  "detail": "EDV 122.3"
+ },
+ {
+  "check": "the result states 'automatic estimate', 'not validated' and 'not a confidence interval'",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "switching slice 6 off changes EDV",
+  "pass": true,
+  "detail": "122.3 -> 102.2"
+ },
+ {
+  "check": "switching slice 6 off changes the EDV sensitivity range",
+  "pass": true,
+  "detail": "[108.1973398146486, 122.31647947404981] -> [92.67228106412598, 102.18405751630381]"
+ },
+ {
+  "check": "switching slice 6 on again restores EDV and range exactly",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "before the toggle V.lvState() says not shown",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "after Show my LV, V.lvState() is loaded and shown",
+  "pass": true,
+  "detail": "{'loaded': True, 'shown': True, 'phase': 17, 'axis_deg': 18.7, 'atlas_axis': [0.807, -0.586, 0.067], 'vertices': 938}"
+ },
+ {
+  "check": "button, HUD toggle and info card agree with V.lvState()",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "after Hide my LV, V.lvState() says not shown and the HUD toggle follows",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "Play shows 'Pause' and the phase advances",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "the cine phase moves while playing",
+  "pass": true,
+  "detail": "2.080388142080007 -> 13.83147867889119"
+ },
+ {
+  "check": "Pause shows 'Play' and the phase stops",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "describe_cine: no arrays, no pixels, no vertices, nothing the guard looks for",
+  "pass": true,
+  "detail": "{\"content\":[{\"type\":\"text\",\"text\":\"\\\"Sunnybrook sample - short-axis cine, 11 slices x 20 phases\\\" (p"
+ },
+ {
+  "check": "describe_cine: the privacy meter counted the result and blocked none",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "measure_lv: no arrays, no pixels, no vertices, nothing the guard looks for",
+  "pass": true,
+  "detail": "{\"content\":[{\"type\":\"text\",\"text\":\"Left ventricle (cine MRI, automatic estimate): EDV 122.3 mL, ESV "
+ },
+ {
+  "check": "measure_lv: the privacy meter counted the result and blocked none",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "show_lv_3d: no arrays, no pixels, no vertices, nothing the guard looks for",
+  "pass": true,
+  "detail": "{\"content\":[{\"type\":\"text\",\"text\":\"Showing the patient's left ventricle beating at 58.8 bpm in the 3"
+ },
+ {
+  "check": "show_lv_3d: the privacy meter counted the result and blocked none",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "export_findings (v2) blocks until a human decides",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "the approval dialog shows schema v2 with the cine_mri block (numbers only)",
+  "pass": true,
+  "detail": "['source', 'slices_total', 'slices_used', 'slices_switched_by_user', 'phases', 'edv_ml']"
+ },
+ {
+  "check": "Escape cancels the export: error to the agent, nothing exported, dialog closed",
+  "pass": true,
+  "detail": "{'content': [{'type': 'text', 'text': 'User declined the export.'}], 'isError': True}"
+ },
+ {
+  "check": "loading another study while the dialog is open cancels the export and closes the dialog",
+  "pass": true,
+  "detail": "{'content': [{'type': 'text', 'text': 'The cine MRI changed during approval; export cancelled. Re-run measure_lv.'}], 'isError': True}"
+ },
+ {
+  "check": "Approve returns the v2 report including cine_mri",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "1440 px: no horizontal overflow with the MRI card",
+  "pass": true,
+  "detail": "scrollWidth 1440 []"
+ },
+ {
+  "check": "390 px: no horizontal overflow with the MRI card",
+  "pass": true,
+  "detail": "scrollWidth 390 []"
+ },
+ {
+  "check": "console clean: no script errors, no console errors during the whole MRI session",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "reduced-motion: page runs and does not auto-rotate",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "reduced-motion: camera is still",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "reduced-motion: fly-to jumps without animation",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "reduced-motion: no errors",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "no WebGL: a readable fallback is shown",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "no WebGL: the clinical dashboard still works",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "no WebGL: selecting a vessel still explains the prediction",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "no WebGL: agent tools still answer",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "no WebGL: describe_heart_model works without a renderer",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "three.js blocked: fallback explains and dashboard works",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "phone 400px: no horizontal scroll",
+  "pass": true,
+  "detail": "scrollWidth 400"
+ },
+ {
+  "check": "phone 400px: 3D stage has usable height",
+  "pass": true,
+  "detail": "528"
+ },
+ {
+  "check": "phone 400px: no element overflows the viewport",
+  "pass": true,
+  "detail": "[]"
+ },
+ {
+  "check": "phone: tapping a row selects and keeps layout intact",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "tablet 820px: no horizontal scroll",
+  "pass": true,
+  "detail": "scrollWidth 820"
+ },
+ {
+  "check": "tablet 820px: 3D stage has usable height",
+  "pass": true,
+  "detail": "560"
+ },
+ {
+  "check": "tablet 820px: no element overflows the viewport",
+  "pass": true,
+  "detail": "[]"
+ },
+ {
+  "check": "desktop-wide 1920px: no horizontal scroll",
+  "pass": true,
+  "detail": "scrollWidth 1920"
+ },
+ {
+  "check": "desktop-wide 1920px: 3D stage has usable height",
+  "pass": true,
+  "detail": "860"
+ },
+ {
+  "check": "desktop-wide 1920px: no element overflows the viewport",
+  "pass": true,
+  "detail": "[]"
+ },
+ {
+  "check": "served by the backend, the page proves JS == scikit-learn parity",
+  "pass": true,
+  "detail": "API \u2713 matches (\u0394 3e-5)"
+ },
+ {
+  "check": "the page called /api/predict",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "POST bodies are clinical numbers only (no scan, mesh or regions)",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "check": "API parity badge still green after changes",
+  "pass": true,
+  "detail": ""
+ }
+]
